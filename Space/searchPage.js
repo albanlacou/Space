@@ -1,23 +1,21 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {SafeAreaView, View, Button, StyleSheet} from 'react-native';
 import {Dropdown} from 'react-native-material-dropdown';
 
-const searchPage = () => {
+const searchPage = props => {
+  const {navigation} = props;
+  const goToApod = useCallback(() => {
+    navigation.navigate('APOD', {title: 'APOD', quantity: 10});
+  }, [navigation]);
+  const goToRover = useCallback(() => {
+    navigation.navigate('roverPage', {title: 'Rover', quantity: 10});
+  }, [navigation]);
+
   return (
     <SafeAreaView style={styles.screen}>
       {/* eslint-disable-next-line react/jsx-no-undef */}
-      <Button
-        onPress={() => {
-          alert('You tapped the button!');
-        }}
-        title="APOD"
-      />
-      <Button
-        onPress={() => {
-          alert('You tapped the button!');
-        }}
-        title="Mars Rover Photos"
-      />
+      <Button onPress={goToApod()} title="APOD" />
+      <Button onPress={goToRover()} title="Mars Rover Photos" />
     </SafeAreaView>
   );
 };
@@ -28,4 +26,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default searchPage();
