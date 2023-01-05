@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import * as React from 'react';
 import type {Node} from 'react';
 import {
   SafeAreaView,
@@ -25,6 +25,10 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+
+import {NavigationContainer} from '@react-navigation/native';
+
+import AppNavigator from './AppNavigator';
 
 /* $FlowFixMe[missing-local-annot] The type annotation(s) required by Flow's
  * LTI update could not be added via codemod */
@@ -62,7 +66,10 @@ const App: () => Node = () => {
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
+    <NavigationContainer>
+      <AppNavigator />
+    </NavigationContainer>
+    /* <SafeAreaView style={backgroundStyle}>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
@@ -91,7 +98,7 @@ const App: () => Node = () => {
           <LearnMoreLinks />
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </SafeAreaView> */
   );
 };
 
