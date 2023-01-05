@@ -8,7 +8,7 @@ import {
   TouchableHighlight,
 } from 'react-native';
 
-const App = item => {
+const App = () => {
   return (
     <SafeAreaView style={styles.screen}>
       <Image source={{uri: item.item.img_src}} style={styles.image} />
@@ -26,7 +26,24 @@ const App = item => {
     </SafeAreaView>
   );
 };
-
+const item = {
+  index: 25,
+  item: {
+    camera: {full_name: 'Mast Camera', id: 22, name: 'MAST', rover_id: 5},
+    earth_date: '2022-12-04',
+    id: 1064246,
+    img_src:
+      'https://mars.nasa.gov/msl-raw-images/msss/03672/mcam/3672MR1032170121005059D01_DXXX.jpg',
+    rover: {
+      id: 5,
+      landing_date: '2012-08-06',
+      launch_date: '2011-11-26',
+      name: 'Curiosity',
+      status: 'active',
+    },
+    sol: 3672,
+  },
+};
 const styles = StyleSheet.create({
   screen: {
     flex: 1,

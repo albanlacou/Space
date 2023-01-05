@@ -2,7 +2,7 @@ import React, {useCallback} from 'react';
 import {SafeAreaView, View, Button, StyleSheet} from 'react-native';
 import {Dropdown} from 'react-native-material-dropdown';
 
-const searchPage = props => {
+const SearchPage = props => {
   const {navigation} = props;
   const goToApod = useCallback(() => {
     navigation.navigate('APOD', {title: 'APOD', quantity: 10});
@@ -26,4 +26,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default searchPage();
+export default SearchPage;

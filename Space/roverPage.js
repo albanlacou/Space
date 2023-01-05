@@ -2,7 +2,7 @@ import React from 'react';
 import {SafeAreaView, View, Button, StyleSheet} from 'react-native';
 import {Dropdown} from 'react-native-material-dropdown';
 
-const roverPage = () => {
+const RoverPage = () => {
   return (
     <SafeAreaView style={styles.screen}>
       {/* eslint-disable-next-line react/jsx-no-undef */}
@@ -34,4 +34,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default roverPage();
+export default RoverPage;

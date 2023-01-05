@@ -3,15 +3,14 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
 
-import App from './App';
-import searchPage from './searchPage';
-import roverPage from './roverPage';
+import SearchPage from './SearchPage';
+import RoverPage from './RoverPage';
 
 const AppNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen name="searchPage" component={searchPage} />
-      <Stack.Screen name="roverPage" component={roverPage} />
+    <Stack.Navigator initialRouteName="searchPage">
+      <Stack.Screen name="searchPage" component={SearchPage} />
+      <Stack.Screen name="roverPage" component={RoverPage} />
     </Stack.Navigator>
   );
 };
