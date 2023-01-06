@@ -1,4 +1,4 @@
-import {React, useEffect, useState} from 'react';
+import {React, useCallback, useEffect, useMemo, useState} from 'react';
 import {
   SafeAreaView,
   View,
@@ -7,15 +7,36 @@ import {
   Image,
   FlatList,
   Platform,
+  TouchableHighlight,
+  TextInput,
 } from 'react-native';
 import moment from 'moment';
 
 const API_KEY = 'cFSEGuYR8CNGMd1s5BVrDSjgSmT73aLglkcC28EH';
-const date = new Date();
-let test = '';
 const todayDate = moment().add(-1, 'month').format('YYYY-MM-DD');
-const Rover = () => {
+const Rover = props => {
+  const {navigation} = props;
+  const [search, setSearch] = useState('');
   const [data, setData] = useState([]);
+  const dataFiltered = useMemo(() => {
+    console.log(search);
+    return data.filter(o => o.rover.name.includes(search));
+  }, [data, search]);
+
+  const goToDetails = useCallback(
+    (img_src, sol, earth_date, landing_date, launch_date, full_name) => {
+      navigation.navigate('RoverDetails', {
+        title: 'RoverDetails',
+        img_src: img_src,
+        sol: sol,
+        earth_date: earth_date,
+        landing_date: landing_date,
+        launch_date: launch_date,
+        full_name: full_name,
+      });
+    },
+    [navigation],
+  );
 
   useEffect(() => {
     getRoverData().then(res => {
@@ -25,25 +46,42 @@ const Rover = () => {
 
   return (
     <SafeAreaView style={styles.screen}>
+      <TextInput
+        placeholder={'test'}
+        style={styles.textInput}
+        value={search}
+        onChangeText={setSearch}
+      />
       <FlatList
         style={styles.flatlist}
-        data={data}
+        data={dataFiltered}
         renderItem={(item, index) => {
-          console.log(item);
           return (
-            <View style={styles.itemContainer}>
-              <View style={styles.titleContainer}>
-                <Text style={styles.title}>
-                  {item.item.rover.name}#{item.item.id}
-                </Text>
+            <TouchableHighlight
+              onPress={() => {
+                goToDetails(
+                  item.item.img_src,
+                  item.item.sol,
+                  item.item.earth_date,
+                  item.item.rover.landing_date,
+                  item.item.rover.launch_date,
+                  item.item.camera.full_name,
+                );
+              }}>
+              <View style={styles.itemContainer}>
+                <View style={styles.titleContainer}>
+                  <Text style={styles.title}>
+                    {item.item.rover.name}#{item.item.id}
+                  </Text>
+                </View>
+                <Image
+                  style={styles.image}
+                  source={{
+                    uri: item.item.img_src,
+                  }}
+                />
               </View>
-              <Image
-                style={styles.image}
-                source={{
-                  uri: item.item.img_src,
-                }}
-              />
-            </View>
+            </TouchableHighlight>
           );
         }}
       />
@@ -86,6 +124,11 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
+  },
+  textInput: {
+    borderWidth: 2,
+    width: 200,
+    height: 40,
   },
 });
 

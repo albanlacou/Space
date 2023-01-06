@@ -8,17 +8,23 @@ import {
   TouchableHighlight,
 } from 'react-native';
 
-const App = () => {
+const RoverDetail = ({route}) => {
+  const {params} = route;
+  const img_src = params.img_src;
+  const sol = params.sol;
+  const earth_date = params.earth_date;
+  const landing_date = params.landing_date;
+  const launch_date = params.launch_date;
+  const full_name = params.full_name;
   return (
     <SafeAreaView style={styles.screen}>
-      <Image source={{uri: item.item.img_src}} style={styles.image} />
+      <Image source={{uri: img_src}} style={styles.image} />
       <View style={styles.textContainer}>
-        <Text>Rover: {item.item.rover.name}</Text>
-        <Text>sol: {item.item.sol}</Text>
-        <Text>earth_date: {item.item.earth_date}</Text>
-        <Text>landing_date: {item.item.rover.landing_date}</Text>
-        <Text>launch_date: {item.item.rover.launch_date}</Text>
-        <Text>camera: {item.item.camera.full_name}</Text>
+        <Text>sol: {sol}</Text>
+        <Text>earth_date: {earth_date}</Text>
+        <Text>landing_date: {landing_date}</Text>
+        <Text>launch_date: {launch_date}</Text>
+        <Text>camera: {full_name}</Text>
       </View>
       <TouchableHighlight style={styles.touchableHighlight}>
         <Text>Like</Text>
@@ -26,24 +32,7 @@ const App = () => {
     </SafeAreaView>
   );
 };
-const item = {
-  index: 25,
-  item: {
-    camera: {full_name: 'Mast Camera', id: 22, name: 'MAST', rover_id: 5},
-    earth_date: '2022-12-04',
-    id: 1064246,
-    img_src:
-      'https://mars.nasa.gov/msl-raw-images/msss/03672/mcam/3672MR1032170121005059D01_DXXX.jpg',
-    rover: {
-      id: 5,
-      landing_date: '2012-08-06',
-      launch_date: '2011-11-26',
-      name: 'Curiosity',
-      status: 'active',
-    },
-    sol: 3672,
-  },
-};
+
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
@@ -70,4 +59,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default RoverDetail;
